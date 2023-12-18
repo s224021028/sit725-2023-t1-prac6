@@ -26,10 +26,17 @@ async function deleteAllExpressions()
     }
 }
 
-function postExpression(operation, numA, numB, ans, callback)
+async function postExpression(operation, numA, numB, ans)
 {
-    var expression = {operation: operation, numA: numA, numB: numB, ans: ans}
-    data.insertOne(expression, callback)
+    try
+    {
+        var expression = {operation: operation, numA: numA, numB: numB, ans: ans}
+        return await data.insertOne(expression)
+    }
+    catch (error)
+    {
+        console.error(error)
+    }
 }
 
 module.exports = {getAllExpressions, postExpression, deleteAllExpressions}

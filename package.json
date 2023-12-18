@@ -4,7 +4,7 @@
   "description": "SIT725-T1-PRAC3",
   "main": "server.js",
   "scripts": {
-    "test": "mocha --reporter list",
+    "test": "mocha --reporter spec",
     "start": "node server.js"
   },
   "repository": {
@@ -22,6 +22,7 @@
     "chai-http": "^4.4.0",
     "express": "^4.18.2",
     "jquery": "^3.7.1",
+    "jsdom": "^23.0.1",
     "mocha": "^10.2.0",
     "mongodb": "^6.3.0",
     "request": "^2.88.2"

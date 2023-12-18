@@ -120,3 +120,5 @@ $(function() {
     })
     getHistory()
 })
+
+module.exports = {limitCharacters}

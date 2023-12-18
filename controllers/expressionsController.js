@@ -7,45 +7,27 @@ function homeView(res)
 
 async function getAllExpressions(req, res)
 {
-    try
-    {
-        var result = await services.expressionsService.getAllExpressions()
-        //console.log("get data success")
-        res.json({data: result})
-    }
-    catch (err)
-    {
-        console.error(err)
-    }
+    var result = await services.expressionsService.getAllExpressions()
+    //console.log("get data success")
+    res.json({data: result})
 }
 
 async function deleteAllExpressions(req, res)
 {
-    try
-    {
-        var result = await services.expressionsService.deleteAllExpressions()
-        //console.log("delete data success")
-        res.json({data: result})
-    }
-    catch (err)
-    {
-        console.error(err)
-    }
+    var result = await services.expressionsService.deleteAllExpressions()
+    //console.log("delete data success")
+    res.json({data: result})
 }
 
-function postExpression(req, res)
+async function postExpression(req, res)
 {
     var operation = req.body.operation
     var numA = parseFloat(req.body.numA)
     var numB = parseFloat(req.body.numB)
     var showDecimal = req.body.showDecimal
     var ans = calculate(operation, numA, numB, showDecimal)
-    services.expressionsService.postExpression(operation, numA, numB, ans, (err, result) => {
-        if(err)
-            console.error(err)
-        else
-            res.json({data: ans})
-    })
+    var result = await services.expressionsService.postExpression(operation, numA, numB, ans)
+    res.json({data: result, answer: ans})
 }
 
 function calculate(operation, numA, numB, showDecimal)
@@ -79,9 +61,8 @@ function calculate(operation, numA, numB, showDecimal)
         return ans
     else
     {
-        console.log(Math.round(ans))
         return Math.round(ans)
     }
 }
 
-module.exports = {getAllExpressions, postExpression, deleteAllExpressions, homeView}
+module.exports = {getAllExpressions, postExpression, deleteAllExpressions, homeView, calculate}
